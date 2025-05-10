@@ -143,3 +143,7 @@ dist
 
 # Vite Cache
 .vite
+
+# Python Cache
+__pycache__/
+*.py[cod]
