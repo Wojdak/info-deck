@@ -1,2 +1,2 @@
 # info-deck
-Customizable personal dashboard web app that lets users view information they care about
+InfoDeck is a personal dashboard web app that allows users to customize and view panels with information they care about - from sports results and game releases to movie premieres and more. Panels are modular and plug-and-play, letting users tailor their dashboard to match their interests. The app supports both guest mode and authenticated mode, making it easy to try out or save custom dashboards. It is a full-stack cloud application leveraging Azure for frontend and backend hosting, with Supabase as the managed PostgreSQL database.

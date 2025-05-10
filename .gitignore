@@ -134,3 +134,12 @@ dist
 .yarn/build-state.yml
 .yarn/install-state.gz
 .pnp.*
+
+# Environment Variables
+.env
+.env.local
+.env.production
+.env.development
+
+# Vite Cache
+.vite
