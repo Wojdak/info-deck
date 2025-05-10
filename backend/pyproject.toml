@@ -11,7 +11,9 @@ dependencies = [
     "fastapi (>=0.115.12,<0.116.0)",
     "uvicorn[standard] (>=0.34.2,<0.35.0)",
     "httpx (>=0.28.1,<0.29.0)",
-    "python-dotenv (>=1.1.0,<2.0.0)"
+    "python-dotenv (>=1.1.0,<2.0.0)",
+    "supabase @ git+https://github.com/supabase-community/supabase-py.git",
+    "asyncpg (>=0.30.0,<0.31.0)"
 ]
 
 
