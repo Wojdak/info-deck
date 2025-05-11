@@ -18,6 +18,8 @@ class Settings:
     # Supabase Configuration (For authentication)
     SUPABASE_URL: str = os.getenv("SUPABASE_URL")
     SUPABASE_API_KEY: str = os.getenv("SUPABASE_API_KEY")
+    SUPABASE_JWT_PUBLIC_KEY: str = os.getenv("SUPABASE_JWT_PUBLIC_KEY")
+    SUPABASE_JWT_AUDIENCE: str = os.getenv("SUPABASE_JWT_AUDIENCE")
 
     def create_supabase_client(self):
         if not self.SUPABASE_URL or not self.SUPABASE_API_KEY:
