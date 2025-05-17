@@ -9,6 +9,8 @@ class Settings:
     PROJECT_NAME: str = "InfoDeck API"
     API_VERSION: str = "v1"
     DEBUG_MODE: bool = os.getenv("DEBUG_MODE", "True") == "True"
+    
+    FRONTEND_URL = tr = os.getenv("FRONTEND_URL")
 
     # API Keys
     RAWG_API_KEY: str = os.getenv("RAWG_API_KEY")
