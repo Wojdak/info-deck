@@ -10,8 +10,34 @@ import {
 } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
+import { useAuthStore } from "@/context/authStore";
+import { useNavigate } from "react-router-dom";
+import { useState } from "react";
 
 export function RegisterForm({ className, ...props }: React.ComponentPropsWithoutRef<"div">) {
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [displayName, setDisplayName] = useState("");
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState<string | null>(null);
+  const { register } = useAuthStore();
+  const navigate = useNavigate();
+
+  const handleRegister = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setLoading(true);
+    setError(null);
+
+    try {
+      await register(email, password, displayName);
+      navigate("/dashboard");
+    } catch (err: any) {
+      setError("Registration failed. Please try again.");
+    } finally {
+      setLoading(false);
+    }
+  };
+
   return (
     <div className={cn("flex flex-col gap-6", className)} {...props}>
       <Card className="bg-[#09090b] text-white border border-white/10 shadow-md">
@@ -22,7 +48,7 @@ export function RegisterForm({ className, ...props }: React.ComponentPropsWithou
           </CardDescription>
         </CardHeader>
         <CardContent>
-          <form>
+          <form onSubmit={handleRegister}>
             <div className="flex flex-col gap-6">
                 <div className="grid gap-2">
                 <Label htmlFor="username" className="text-white">
@@ -33,6 +59,11 @@ export function RegisterForm({ className, ...props }: React.ComponentPropsWithou
                   type="text"
                   placeholder="johndoe"
                   className="bg-[#1c1c1e] text-white border border-white/20 placeholder-gray-400"
+                  value={displayName}
+                  onChange={(e) => {
+                    setDisplayName(e.target.value);
+                    setError(null);
+                  }}
                   required
                 />
               </div>
@@ -45,6 +76,11 @@ export function RegisterForm({ className, ...props }: React.ComponentPropsWithou
                   type="email"
                   placeholder="johndoe@example.com"
                   className="bg-[#1c1c1e] text-white border border-white/20 placeholder-gray-400"
+                  value={email}
+                  onChange={(e) => {
+                    setEmail(e.target.value);
+                    setError(null);
+                  }}
                   required
                 />
               </div>
@@ -58,21 +94,31 @@ export function RegisterForm({ className, ...props }: React.ComponentPropsWithou
                   id="password"
                   type="password"
                   className="bg-[#1c1c1e] text-white border border-white/20 placeholder-gray-400"
-                  required
                   placeholder="*************"
+                  value={password}
+                  onChange={(e) => {
+                    setPassword(e.target.value);
+                    setError(null);
+                  }}
+                  required
                 />
               </div>
 
+              {error && <p className="text-red-500 text-sm mt-2">{error}</p>}
+
               <Button type="submit" className="w-full bg-purple-600 text-white hover:bg-purple-500 transition rounded-md">
-                Register
+                {loading ? "Creating account..." : "Register"}
               </Button>
             </div>
 
             <div className="mt-4 text-center text-sm text-gray-400">
-             Already have an account?{" "}
-              <a href="/login" className="underline underline-offset-4 text-white hover:text-purple-400">
+              Already have an account?{" "}
+              <span 
+                className="underline underline-offset-4 text-white hover:text-purple-400 cursor-pointer"
+                onClick={() => navigate("/login")}
+              >
                 Login here
-              </a>
+              </span>
             </div>
           </form>
         </CardContent>

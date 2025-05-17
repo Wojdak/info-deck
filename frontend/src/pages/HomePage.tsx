@@ -1,35 +1,14 @@
-// src/pages/HomePage.tsx
 import React from "react";
 import { Button } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator";
-import { motion, useInView } from "framer-motion";
+import TypingEffect from "@/components/TypingEffect"
 import { CardBody, CardWithGridEllipsis } from "@/components/CardWithGridEllipsis";
 import { FaArrowRight } from "react-icons/fa";
-
-const TypingEffect: React.FC<{ text: string }> = ({ text }) => {
-  const ref = React.useRef(null);
-  const isInView = useInView(ref, { once: true });
-
-  return (
-    <motion.h1
-      ref={ref}
-      className="text-6xl font-extrabold text-white mb-4 tracking-tight leading-tight text-center"
-      style={{ textShadow: "0 0 7px #6b46c1, 0 0 17px #6b46c1" }}>
-      {text.split("").map((letter, index) => (
-        <motion.span
-          key={index}
-          initial={{ opacity: 0 }}
-          animate={isInView ? { opacity: 1 } : {}}
-          transition={{ duration: 0.05, delay: index * 0.05 }}
-        >
-          {letter}
-        </motion.span>
-      ))}
-    </motion.h1>
-  );
-};
+import { useNavigate } from "react-router-dom";
 
 const HomePage: React.FC = () => {
+  const navigate = useNavigate();
+
   return (
     <div className="flex flex-col bg-[#09090b] text-white">
       {/* Main Content Area */}
@@ -47,6 +26,7 @@ const HomePage: React.FC = () => {
               size="lg" 
               className="px-8 py-3 text-lg bg-purple-600 text-white hover:bg-purple-500 rounded-md shadow-md transition-transform duration-200" 
               rightIcon={<FaArrowRight />}
+              onClick={() => navigate("/dashboard")}
             >
               Try it now
             </Button>
