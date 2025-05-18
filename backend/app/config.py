@@ -10,7 +10,9 @@ class Settings:
     API_VERSION: str = "v1"
     DEBUG_MODE: bool = os.getenv("DEBUG_MODE", "True") == "True"
     
+    # URLs
     FRONTEND_URL = tr = os.getenv("FRONTEND_URL")
+    RAWG_API_URL = tr = os.getenv("RAWG_API_URL")
 
     # API Keys
     RAWG_API_KEY: str = os.getenv("RAWG_API_KEY")

@@ -3,6 +3,7 @@ from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from app.config import settings
 from app.routers import auth
+from app.routers import games
 
 app = FastAPI(title=settings.PROJECT_NAME, version=settings.API_VERSION)
 
@@ -16,6 +17,7 @@ app.add_middleware(
 
 # Registering Routers
 app.include_router(auth.router, prefix="/auth")
+app.include_router(games.router, prefix="/api")
 
 @app.get("/")
 def read_root():
