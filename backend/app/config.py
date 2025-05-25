@@ -30,12 +30,15 @@ class Settings:
             raise ValueError("Supabase URL or API Key is missing.")
         return create_client(self.SUPABASE_URL, self.SUPABASE_API_KEY)
     
-    # PostgreSQL Configuration (Direct DB connection with asyncpg)
+    # Supabase DB Configuration (Direct DB connection with asyncpg)
     DB_HOST: str = os.getenv("DB_HOST")
     DB_PORT: int = int(os.getenv("DB_PORT"))
     DB_NAME: str = os.getenv("DB_NAME")
     DB_USER: str = os.getenv("DB_USER")
     DB_PASSWORD: str = os.getenv("DB_PASSWORD")
+
+    # Redis Cache
+    REDIS_URL: str = os.getenv("REDIS_URL")
 
 settings = Settings()
 supabase_client = settings.create_supabase_client()

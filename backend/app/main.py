@@ -1,9 +1,14 @@
-# Main application entry point
+import logging
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from app.config import settings
 from app.routers import auth
 from app.routers import games
+
+logging.basicConfig(
+    level=logging.INFO,
+    format="%(asctime)s - %(levelname)s - %(message)s",
+)
 
 app = FastAPI(title=settings.PROJECT_NAME, version=settings.API_VERSION)
 
